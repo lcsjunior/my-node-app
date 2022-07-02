@@ -7,8 +7,12 @@ async function list(req, res) {
 
 async function create(req, res) {
   const { name, calories } = req.body;
-  const food = await Food.create({ name, calories });
-  res.status(200).json(food);
+  try {
+    const food = await Food.create({ name, calories });
+    res.status(200).json(food);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
 }
 
 async function detail(req, res) {
