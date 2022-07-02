@@ -36,8 +36,8 @@ async function update(req, res) {
 
 async function remove(req, res) {
   const { id } = req.params;
-  await Food.findOneAndDelete({ id });
-  res.status(200).json({ deleted: true });
+  const deleted = await Food.findOneAndDelete({ id });
+  res.status(200).json({ deleted });
 }
 
 module.exports = {
