@@ -1,4 +1,4 @@
-function index(req, res, next) {
+function index(req, res) {
   res.render('index', { title: 'Express' });
 }
 
