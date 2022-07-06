@@ -5,11 +5,14 @@ function isAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
-  res.redirect('/');
+  res.status(403).send('Unauthorized');
 }
 
 function isAuthorized(req, res, next) {
-  return next();
+  if (req.user.username === 'admin') {
+    return next();
+  }
+  res.status(403).send('Forbidden');
 }
 
 passport.use(
@@ -21,18 +24,6 @@ passport.use(
       });
     }
     return done(null, false);
-    // User.findOne({ username: username }, (err, user) => {
-    //   if (err) {
-    //     return done(err);
-    //   }
-    //   if (!user) {
-    //     return done(null, false);
-    //   }
-    //   if (!user.validPassword(password)) {
-    //     return done(null, false);
-    //   }
-    //   return done(null, user);
-    // });
   })
 );
 
