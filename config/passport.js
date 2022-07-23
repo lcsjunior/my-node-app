@@ -5,7 +5,7 @@ function isAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
-  res.status(403).send('Unauthorized');
+  res.status(401).send('Unauthorized');
 }
 
 function isAuthorized(req, res, next) {
